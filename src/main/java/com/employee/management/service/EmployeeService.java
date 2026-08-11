@@ -27,4 +27,16 @@ public class EmployeeService {
     public Optional<Employee> getEmployeeById(Long id) {
         return employeeRepository.findById(id);
     }
+
+    public Employee updateEmployee(Long id, Employee employeeDetails) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Employee not found: " + id));
+
+        employee.setName(employeeDetails.getName());
+        employee.setEmail(employeeDetails.getEmail());
+        employee.setDepartment(employeeDetails.getDepartment());
+
+        return employeeRepository.save(employee);
+    }
 }
