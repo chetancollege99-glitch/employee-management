@@ -36,7 +36,7 @@ pipeline {
 
         stage('Deploy Docker Container') {
             steps {
-                sh 'docker run -d --name employee-management -p 8081:8080 employee-management:latest'
+                sh 'docker run -d --name employee-management --network employee-network -p 8081:8080 employee-management:latest'
             }
         }
     }
