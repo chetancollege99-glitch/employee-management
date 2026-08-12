@@ -36,7 +36,7 @@ pipeline {
 
         stage('Deploy Docker Container') {
             steps {
-                sh docker run -d --name employee-management -p 8081:8080 employee-management:latest
+                sh 'docker run -d --name employee-management -p 8081:8080 employee-management:latest'
             }
         }
     }
@@ -47,7 +47,7 @@ pipeline {
         }
 
         failure {
-            echo 'Pipeline failed. Deployment was not completed.'
+            echo 'Pipeline failed. Docker deployment will not run.'
         }
     }
 }
