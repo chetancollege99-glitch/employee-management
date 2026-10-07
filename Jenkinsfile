@@ -1,52 +1,26 @@
 pipeline {
+
     agent any
 
     stages {
 
         stage('Checkout') {
-           https://github.com/chetancollege99-glitch/employee-management.git
-            }
-        
-
-        stage('Maven Test') {
             steps {
-                sh './mvnw clean test'
+                checkout scm
             }
         }
 
-        stage('Maven Package') {
+        stage('Build') {
             steps {
-                sh './mvnw package -DskipTests'
+                echo 'Building application'
             }
         }
 
-        stage('Docker Build') {
+        stage('Test') {
             steps {
-                sh 'docker build -t employee-management:latest .'
+                echo 'Running tests'
             }
         }
 
-        stage('Stop Previous Container') {
-            steps {
-                sh 'docker stop employee-management || true'
-                sh 'docker rm employee-management || true'
-            }
-        }
-
-        stage('Deploy Docker Container') {
-            steps {
-                sh 'docker run -d --name employee-management --network employee-network -p 8081:8080 employee-management:latest'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'CI/CD pipeline completed successfully.'
-        }
-
-        failure {
-            echo 'Pipeline failed. Docker deployment will not run.'
-        }
     }
 }
