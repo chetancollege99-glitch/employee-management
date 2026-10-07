@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout') {
            https://github.com/chetancollege99-glitch/employee-management.git
             }
-        }
+        
 
         stage('Maven Test') {
             steps {
