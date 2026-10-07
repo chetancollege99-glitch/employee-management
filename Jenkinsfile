@@ -4,8 +4,7 @@ pipeline {
     stages {
 
         stage('Checkout') {
-            steps {
-                checkout scm
+           https://github.com/chetancollege99-glitch/employee-management.git
             }
         }
 
